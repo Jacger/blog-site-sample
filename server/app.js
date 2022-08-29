@@ -9,10 +9,6 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,6 +23,21 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+//connect database
+const db = require("./config/database");
+db.connect();
+
+//cors
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+
+// body-parser
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -37,5 +48,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// // route
+// route(app);
 
 module.exports = app;
