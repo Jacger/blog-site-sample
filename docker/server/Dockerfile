@@ -1,7 +1,7 @@
 FROM node:18-alpine3.15
 
 WORKDIR /app
-COPY ./server /
-RUN npm install
+
+COPY ./entrypoint.sh ./wait-for-it.sh /
 
 EXPOSE 3000
