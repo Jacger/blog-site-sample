@@ -3,5 +3,3 @@ FROM node:18-alpine3.15
 WORKDIR /app
 
 COPY ./entrypoint.sh ./wait-for-it.sh /
-
-EXPOSE 3000
