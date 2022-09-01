@@ -1,18 +1,14 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const { mongoUrl } = require('../../utils/common');
 
-const userName = process.env.MONGO_ROOT_USERNAME || "root";
-const password = process.env.MONGO_ROOT_PASSWORD || "password";
-const db = process.env.MONGO_ROOT_DB || "db";
-const port = process.env.MONGO_ROOT_PORT || "27017";
-const mongoUrl = `mongodb://${userName}:${password}@${db}:${port}`;
+console.log(`Connect string: ${mongoUrl}`);
+//Set up default mongoose connection
+mongoose.connect(mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true});
 
-async function connect() {
-  try {
-    await mongoose.connect(mongoUrl);
-    console.log("Connect successfully");
-  } catch (error) {
-    console.log("Connect failed");
-  }
-}
+//Get the default connection
+const db = mongoose.connection;
 
-module.exports = connect;
+db.on('connected', console.log.bind(console, 'MongoDB connected'));
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));

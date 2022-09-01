@@ -10,6 +10,8 @@ services:
     volumes:
       - ./server/data/db:/data/db
       - ./server/configs/mongoDb:/data/configdb
+    ports:
+      - 27017:27017
 
   server:
     build: ./docker
@@ -22,11 +24,11 @@ services:
     ports:
       - 3000:3000
 
-  web:
-    build: ./docker
-    command: sh /entrypoint.sh
-    volumes:
-      - ./web:/app
-      - ./web/node_modules:/app/node_modules
-    ports:
-      - 5000:3001
+  # web:
+  #   build: ./docker
+  #   command: sh /entrypoint.sh
+  #   volumes:
+  #     - ./web:/app
+  #     - ./web/node_modules:/app/node_modules
+  #   ports:
+  #     - 5000:3001

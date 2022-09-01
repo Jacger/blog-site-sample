@@ -1,5 +1,4 @@
 {
-  "watch": ["src"],
   "verbose": true,
-  "ignore": "data/config/configdb/*"
+  "ignore": "configs/*"
 }
