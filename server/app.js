@@ -1,3 +1,6 @@
+const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
+const dashboardRouter = require('./routes/dashboard');
 const express = require("express");
 const path = require("path");
 // const cookieParser = require("cookie-parser");
@@ -6,16 +9,15 @@ const path = require("path");
 const app = express();
 
 //connect database
-const connectDatabase = require('./configs/mongoDb/database');
-connectDatabase();
+require('./configs/mongoDb/database');
 
 // app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use('/', dashboardRouter);
+app.use('/users', usersRouter);
+app.use('/users/:userId', postsRouter);
 
 module.exports = app;
