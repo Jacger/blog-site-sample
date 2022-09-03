@@ -1,29 +1,25 @@
-const Post = require('../models/Post');
+const {indexData, showData, createData, editData, updateData} = require('../data/fake/posts');
 
 exports.index = (req, res) => {
-  res.send('NOT IMPLEMENTED: Post list GET');
-};
-
-exports.new = (req, res) => {
-  res.send('NOT IMPLEMENTED: User list GET');
+  res.status(200).json(indexData);
 };
 
 exports.show = (req, res) => {
-  res.send(`NOT IMPLEMENTED: Post detail: ${req.params.id} GET`);
+  res.status(200).json(showData);
 };
 
 exports.create = (req, res) => {
-  res.send('NOT IMPLEMENTED: Post create POST');
+  res.status(200).json(createData);
 };
 
 exports.edit = (req, res) => {
-  res.send('NOT IMPLEMENTED: Post edit GET');
+  res.status(200).json(editData);
 };
 
 exports.update = (req, res) => {
-  res.send('NOT IMPLEMENTED: Post update PUT/PATCH');
+  res.status(200).json(updateData);
 };
 
 exports.delete = (req, res) => {
-  res.send('NOT IMPLEMENTED: Post delete DELETE');
+  res.status(200).json("User has been deleted");
 };
