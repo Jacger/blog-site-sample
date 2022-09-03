@@ -1,55 +1,45 @@
-import { useState } from 'react';
-import './login.scss';
+import { useState } from "react";
+import "./login.scss";
+import Title from "../../components/auth/Title.component";
+import LoginForm from "../../components/auth/LoginForm.component";
+import ForgotPassword from "../../components/auth/ForgotPassword.component";
+import {
+  signInWithGooglePopup,
+  authenticateUser,
+} from "../../utils/firebase/firebase.utils";
+
+const defaultFormField = {
+  email: "",
+  password: "",
+};
 
 function Login() {
-  const [inputField, setInputField] = useState({
-    email: '',
-    password: '',
-  });
+  const logGoogleUser = async () => {
+    const { user } = await signInWithGooglePopup();
+    await authenticateUser(user);
+  };
+  const [formFields, setForms] = useState(defaultFormField);
 
-  const inputHandler = (e) => {
-    setInputField({ [e.target.name]: e.target.value });
+  const handlerChange = (event) => {
+    const { name, value } = event.target;
+    setForms({ ...formFields, [name]: value });
   };
 
   const submitButton = () => {
-    alert(inputField.first_name);
+    // Code here...
   };
 
   return (
     <div className="wrapper fadeInDown">
+      <button onClick={logGoogleUser}>Sign in with Google Popup</button>
       <div id="formContent">
-        <div className="fadeIn first">Login page</div>
-        <form>
-          <input
-            type="email"
-            id="login"
-            className="fadeIn second"
-            onChange={inputHandler}
-            name="login"
-            value={inputField.email}
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            id="password"
-            className="fadeIn third"
-            onChange={inputHandler}
-            name="login"
-            value={inputField.password}
-            placeholder="Password"
-          />
-          <input
-            type="submit"
-            className="fadeIn fourth"
-            value="Log In"
-            onClick={submitButton}
-          />
-        </form>
-        <div id="formFooter">
-          <a className="underlineHover" href="#">
-            Forgot Password?
-          </a>
-        </div>
+        <Title />
+        <LoginForm
+          formFields={formFields}
+          submitButton={submitButton}
+          inputHandler={handlerChange}
+        />
+        <ForgotPassword />
       </div>
     </div>
   );
