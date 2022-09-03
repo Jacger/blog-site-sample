@@ -1,22 +1,41 @@
-import React from 'react'
+import { useState } from "react";
+import "./register.scss";
+import Title from "../../components/auth/Title.component";
+import RegisterForm from "../../components/auth/RegisterForm.component";
+import ForgotPassword from "../../components/auth/ForgotPassword.component";
+
+const defaultFormField = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+};
 
 function Register() {
+  const [formFields, setForms] = useState(defaultFormField);
+
+  const handlerChange = (event) => {
+    const {name, value} = event.target;
+    setForms({ ...formFields, [name]: value });
+  };
+
+  const submitButton = () => {
+    // Code here...
+  };
+
   return (
     <div className="wrapper fadeInDown">
       <div id="formContent">
-        <div className="fadeIn first">User Icon</div>
-        <form>
-          <input type="email" id="login" className="fadeIn second" name="email" placeholder="Email" />
-          <input type="password" id="password" className="fadeIn third" name="password" placeholder="password" />
-          <input type="password" id="password" className="fadeIn third" name="confirm_password" placeholder="Confirm password" />
-          <input type="submit" className="fadeIn fourth" value="Log In" />
-        </form>
-        <div id="formFooter">
-          <a className="underlineHover" href="#">Forgot Password?</a>
-        </div>
+      <Title />
+        <RegisterForm
+          formFields={formFields}
+          submitButton={submitButton}
+          inputHandler={handlerChange}
+        />
+        <ForgotPassword />
       </div>
     </div>
-  )
+  );
 }
 
 export default Register;
