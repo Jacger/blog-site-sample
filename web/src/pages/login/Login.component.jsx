@@ -4,7 +4,7 @@ import Title from "../../components/auth/Title.component";
 import LoginForm from "../../components/auth/LoginForm.component";
 import ForgotPassword from "../../components/auth/ForgotPassword.component";
 import {
-  signInWithGooglePopup,
+  signInAuthUserWithEmailAndPassword,
   authenticateUser,
 } from "../../utils/firebase/firebase.utils";
 
@@ -14,29 +14,42 @@ const defaultFormField = {
 };
 
 function Login() {
-  const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    await authenticateUser(user);
-  };
   const [formFields, setForms] = useState(defaultFormField);
+  const { email, password } = formFields;
+
+  const resetFormFields = () => {
+    setForms(defaultFormField);
+  }
 
   const handlerChange = (event) => {
     const { name, value } = event.target;
     setForms({ ...formFields, [name]: value });
   };
 
-  const submitButton = () => {
-    // Code here...
+  const handlerSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { user } = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      await authenticateUser(user);
+      resetFormFields();
+      alert("Login successful");
+    } catch (error) {
+      alert("Login failed");
+      console.log("error :>> ", error);
+    }
   };
 
   return (
     <div className="wrapper fadeInDown">
-      <button onClick={logGoogleUser}>Sign in with Google Popup</button>
       <div id="formContent">
         <Title />
         <LoginForm
           formFields={formFields}
-          submitButton={submitButton}
+          handlerSubmit={handlerSubmit}
           inputHandler={handlerChange}
         />
         <ForgotPassword />

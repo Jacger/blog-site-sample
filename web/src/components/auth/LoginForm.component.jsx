@@ -1,6 +1,7 @@
 function LoginForm(props) {
-  const {formFields, submitButton, inputHandler} = props;
-  console.log('Form');
+  const {formFields, handlerSubmit, inputHandler} = props;
+  const {email, password} = formFields;
+  console.log('Login Form');
 
   return (
     <form>
@@ -10,7 +11,7 @@ function LoginForm(props) {
         className="fadeIn second"
         onChange={inputHandler}
         name="email"
-        value={formFields.email}
+        value={email}
         placeholder="Email"
       />
       <input
@@ -19,14 +20,14 @@ function LoginForm(props) {
         className="fadeIn third"
         onChange={inputHandler}
         name="password"
-        value={formFields.password}
+        value={password}
         placeholder="Password"
       />
       <input
         type="submit"
         className="fadeIn fourth"
         value="Log In"
-        onClick={submitButton}
+        onClick={handlerSubmit}
       />
     </form>
   )
