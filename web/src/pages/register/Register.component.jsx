@@ -51,7 +51,7 @@ function Register() {
   };
 
   return (
-    <div className="wrapper fadeInDown">
+    <div className="wrapper fadeInDown register-form">
       <div id="formContent">
         <Title />
         <RegisterForm

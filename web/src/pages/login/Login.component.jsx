@@ -44,7 +44,7 @@ function Login() {
   };
 
   return (
-    <div className="wrapper fadeInDown">
+    <div className="wrapper fadeInDown login-form">
       <div id="formContent">
         <Title />
         <LoginForm

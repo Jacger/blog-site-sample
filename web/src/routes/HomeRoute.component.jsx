@@ -1,14 +1,17 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import CategoriesContainer from '../components/categories/CategoriesContainer.component';
 
 function HomeRoute() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const categories = require('../data/categories.json');
+    console.log(categories);
+    setCategories(categories);
+  }, [])
+
   return (
-    <div>
-      Home page
-      <br />
-      <Link to='login'>Login</Link>
-      <br />
-      <Link to='register'>Register</Link>
-    </div>
+    <CategoriesContainer categories={categories} />
   )
 }
 
