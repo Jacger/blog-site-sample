@@ -1,4 +1,4 @@
-import HomeLayout from '../../layouts/HomeLayout.component';
+import HomeLayout from '../layouts/HomeLayout.component';
 
 function NavigationRoute() {
   return (
