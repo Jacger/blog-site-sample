@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import HomeRoute from "./routes/HomeRoute.component";
 import { AuthenticationRoute as LoginRoute } from "./routes/AuthenticationRoute.component";
 import RegisterRoute from "./routes/RegisterRoute.component";
-import NavigationRoute from './routes/navigation/NavigationRoute.component';
+import NavigationRoute from './routes/NavigationRoute.component';
 
 function App() {
   return (

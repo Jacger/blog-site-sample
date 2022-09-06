@@ -4,7 +4,7 @@ import "./header.style.scss";
 
 function Header() {
   return (
-    <div class="navigation">
+    <div className="navigation">
       <Link className="logo-container" to="/">
         <CrownLogo />
       </Link>
