@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./register.scss";
 import Title from "../../components/auth/Title.component";
 import RegisterForm from "../../components/auth/RegisterForm.component";
+import { UserContext } from "../../contexts/user.context";
 import {
   createAuthUserWithEmailAndPassword,
   authenticateUser,
@@ -17,10 +18,11 @@ const defaultFormField = {
 function Register() {
   const [formFields, setForms] = useState(defaultFormField);
   const { name, email, password, confirmPassword } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setForms(defaultFormField);
-  }
+  };
 
   const handlerChange = (event) => {
     const { name, value } = event.target;
@@ -41,10 +43,12 @@ function Register() {
         password
       );
       await authenticateUser(user, { displayName: name });
+      setCurrentUser(user);
+
       resetFormFields();
     } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        alert('Cannot create user, email already in use');
+      if (error.code === "auth/email-already-in-use") {
+        alert("Cannot create user, email already in use");
       }
       console.log("error :>> ", error);
     }
@@ -53,7 +57,7 @@ function Register() {
   return (
     <div className="wrapper fadeInDown register-form">
       <div id="formContent">
-        <Title />
+        <Title title="SIGNUP" />
         <RegisterForm
           formFields={formFields}
           handlerSubmit={handlerSubmit}
