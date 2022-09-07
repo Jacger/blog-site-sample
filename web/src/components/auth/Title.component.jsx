@@ -1,8 +1,10 @@
-function Title() {
+function Title({title}) {
   console.log('Title');
 
   return (
-    <div className="fadeIn first">Login page</div>
+    <div className="fadeIn first title">
+      <h1>{title}</h1>
+    </div>
   )
 }
 

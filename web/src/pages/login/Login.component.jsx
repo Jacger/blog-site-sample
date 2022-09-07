@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./login.scss";
 import Title from "../../components/auth/Title.component";
 import LoginForm from "../../components/auth/LoginForm.component";
 import ForgotPassword from "../../components/auth/ForgotPassword.component";
+import { UserContext } from "../../contexts/user.context";
 import {
   signInAuthUserWithEmailAndPassword,
   authenticateUser,
@@ -16,10 +17,11 @@ const defaultFormField = {
 function Login() {
   const [formFields, setForms] = useState(defaultFormField);
   const { email, password } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setForms(defaultFormField);
-  }
+  };
 
   const handlerChange = (event) => {
     const { name, value } = event.target;
@@ -34,7 +36,8 @@ function Login() {
         email,
         password
       );
-      await authenticateUser(user);
+      setCurrentUser(user);
+
       resetFormFields();
       alert("Login successful");
     } catch (error) {
@@ -46,7 +49,7 @@ function Login() {
   return (
     <div className="wrapper fadeInDown login-form">
       <div id="formContent">
-        <Title />
+        <Title title="LOGIN" />
         <LoginForm
           formFields={formFields}
           handlerSubmit={handlerSubmit}

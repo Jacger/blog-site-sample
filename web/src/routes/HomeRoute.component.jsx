@@ -6,7 +6,6 @@ function HomeRoute() {
 
   useEffect(() => {
     const categories = require('../data/categories.json');
-    console.log(categories);
     setCategories(categories);
   }, [])
 
