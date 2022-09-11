@@ -2,40 +2,37 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as CrownLogo } from "../../../assets/crown.svg";
 import { UserContext } from "../../../contexts/user.context";
+import { CartContext } from "../../../contexts/cart.context";
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
+import CartIcon from "../../../components/cart-icon/CartIcon.component";
+import CartDropdown from "../../cart-dropdown/CartDropdown.component";
 import "./header.style.scss";
 
 function Header() {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  const signOutHandler = async () => {
-    try {
-      await signOutUser();
-      setCurrentUser(null);
-    } catch (error) {
-      console.log(error.messages);
-    }
-  }
+  const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <div className="navigation">
       <Link className="logo-container" to="/">
         <CrownLogo />
       </Link>
-      <div className="link-container">
-        <Link className="link" to="/shop">
+      <div className="nav-links-container">
+        <Link className="nav-link" to="/shop">
           SHOP
         </Link>
         {currentUser ? (
-          <div className="link" onClick={signOutHandler}>
-            LOG OUT
+          <div className="nav-link" onClick={signOutUser}>
+            SIGN OUT
           </div>
         ) : (
-          <Link className="link" to="/login">
-            LOGIN
+          <Link className="nav-link" to="/auth">
+            SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {isCartOpen && <CartDropdown />}
     </div>
   );
 }
