@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import HomeRoute from "./routes/HomeRoute.component";
 import { AuthenticationRoute } from "./routes/AuthenticationRoute.component";
-import RegisterRoute from "./routes/RegisterRoute.component";
 import NavigationRoute from "./routes/NavigationRoute.component";
 import ShopRoute from "./routes/ShopRoute.component";
 
