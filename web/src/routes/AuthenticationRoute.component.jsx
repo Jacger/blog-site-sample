@@ -1,7 +1,11 @@
-import Login from "../pages/login/Login.component";
+import AuthenticationPage from "../pages/authentication/AuthenticationPage.component";
 
 function AuthenticationRoute() {
-  return <Login />;
+  return (
+    <div>
+      <AuthenticationPage />
+    </div>
+  );
 }
 
 export { AuthenticationRoute };
