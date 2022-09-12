@@ -1,28 +1,18 @@
-import { useState } from "react";
-import {
-  createAuthUserWithEmailAndPassword,
-  authenticateUser,
-} from "../../utils/firebase/firebase.utils";
-import FormInput from "../form-input/FormInput.component";
-import "./SignUpForm.style.scss";
-import Button from "../button/Button.component";
+import { useState, useContext } from "react";
+import FormInput from '../form-input/FormInput.component';
+import Button from '../button/Button.component';
+import { handleAfterSignUp, defaultSignUpValue } from "../../utils/authentication/authentication.utils";
+import { UserContext } from "../../contexts/user.context";
 
-const defaultFormField = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
+import './SignUpForm.style.scss';
 
 function SignUpForm() {
-  const [formFields, setForms] = useState(defaultFormField);
+  const [formFields, setForms] = useState(defaultSignUpValue);
   const { name, email, password, confirmPassword } = formFields;
+  const { saveUserInfo } = useContext(UserContext);
+  console.log("SignUpForm");
 
-  const resetFormFields = () => {
-    setForms(defaultFormField);
-  };
-
-  const InputHandler = (event) => {
+  const inputHandler = (event) => {
     const { name, value } = event.target;
     setForms({ ...formFields, [name]: value });
   };
@@ -34,21 +24,7 @@ function SignUpForm() {
       alert("Password do not match!");
       return;
     }
-
-    try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await authenticateUser(user, { displayName: name });
-
-      resetFormFields();
-    } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        alert("Cannot create user, email already in use");
-      }
-      console.log("error :>> ", error);
-    }
+    handleAfterSignUp(formFields, saveUserInfo, setForms);
   };
 
   return (
@@ -60,7 +36,7 @@ function SignUpForm() {
           label="Name"
           type="text"
           required
-          onChange={InputHandler}
+          onChange={inputHandler}
           name="name"
           value={name}
         />
@@ -68,7 +44,7 @@ function SignUpForm() {
           label="Email"
           type="email"
           required
-          onChange={InputHandler}
+          onChange={inputHandler}
           name="email"
           value={email}
         />
@@ -76,7 +52,7 @@ function SignUpForm() {
           label="Password"
           type="password"
           required
-          onChange={InputHandler}
+          onChange={inputHandler}
           name="password"
           value={password}
         />
@@ -84,7 +60,7 @@ function SignUpForm() {
           label="Confirm password"
           type="password"
           required
-          onChange={InputHandler}
+          onChange={inputHandler}
           name="confirmPassword"
           value={confirmPassword}
         />
