@@ -4,6 +4,7 @@ import './home.style.scss'
 
 function HomeRoute() {
   const [categories, setCategories] = useState([]);
+  console.log('HomeRoute');
 
   useEffect(() => {
     const categories = require('../../data/categories.json');

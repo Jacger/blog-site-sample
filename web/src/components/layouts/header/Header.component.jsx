@@ -9,10 +9,15 @@ import CartDropdown from "../../cart-dropdown/CartDropdown.component";
 import "./header.style.scss";
 
 function Header() {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, saveUserInfo } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
+  console.log('Header');
 
-  console.log(currentUser);
+  const signOutHandler = () => {
+    signOutUser();
+    saveUserInfo(null);
+  }
+
   return (
     <div className="navigation">
       <Link className="logo-container" to="/">
@@ -23,7 +28,7 @@ function Header() {
           SHOP
         </Link>
         {currentUser ? (
-          <div className="nav-link" onClick={signOutUser}>
+          <div className="nav-link" onClick={signOutHandler}>
             SIGN OUT
           </div>
         ) : (

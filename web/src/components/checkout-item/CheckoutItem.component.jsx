@@ -5,6 +5,7 @@ import './CheckoutItem.component.scss'
 function CheckoutItem({ item }) {
   const { addItemToCart, minusItemFromCart, removeItemFromCart } = useContext(CartContext);
   const { name, quantity, imageUrl, price } = item;
+  console.log('CheckoutItem');
 
   const increaseHandler = () => addItemToCart(item);
   const decreaseHandler = () => minusItemFromCart(item)

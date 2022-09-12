@@ -2,6 +2,7 @@ import './category.style.scss'
 
 function CategoryContainer({category}) {
   const { title, imageUrl } = category;
+  console.log('CategoryContainer');
 
   return (
     <div className="category-container">

@@ -6,11 +6,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC9BlMFpUZv53WFFSfpzJ3D_74s9oXKyj0",
@@ -21,7 +21,7 @@ const firebaseConfig = {
   appId: "1:1034423503308:web:9e8ae23316d93fb85e7569",
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -76,9 +76,9 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => {
   await signOut(auth);
-  (new Cookies()).remove('user');
+  (new Cookies()).remove("user");
 };
 
 export const onAuthStateChangedListener = (callback) => {
   onAuthStateChanged(auth, callback);
-}
+};
