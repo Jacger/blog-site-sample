@@ -2,10 +2,17 @@ import { useContext } from "react";
 import Button from "../button/Button.component";
 import CartItem from "../cart-item/CartItem.component";
 import { CartContext } from "../../contexts/cart.context";
+import { useNavigate } from "react-router-dom";
 import "./CartDropdown.style.scss";
 
 function CartDropdown() {
   const { cartItems } = useContext(CartContext);
+  let navigate = useNavigate();
+
+  const goToCheckoutHandler = () => {
+    console.log('Im redirect');
+    navigate('checkout');
+  }
 
   return (
     <div className="cart-dropdown-container">
@@ -14,7 +21,7 @@ function CartDropdown() {
           <CartItem key={item.id} item={item} />
         ))}
       </div>
-      <Button>GO TO CHECKOUT</Button>
+      <Button onClick={goToCheckoutHandler}>GO TO CHECKOUT</Button>
     </div>
   );
 }

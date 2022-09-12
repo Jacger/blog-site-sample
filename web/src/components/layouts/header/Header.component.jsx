@@ -12,6 +12,7 @@ function Header() {
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
 
+  console.log(currentUser);
   return (
     <div className="navigation">
       <Link className="logo-container" to="/">
