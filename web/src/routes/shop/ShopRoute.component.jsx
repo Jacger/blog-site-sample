@@ -3,7 +3,7 @@ import { ProductsContext } from "../../contexts/products.context";
 import ProductCard from "../../components/product-cart/ProductCard.component";
 import './shop.style.scss';
 
-function Shop() {
+function ShopRoute() {
   const { products } = useContext(ProductsContext);
 
   return (
@@ -12,7 +12,7 @@ function Shop() {
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
-  );
+  )
 }
 
-export default Shop;
+export default ShopRoute;
