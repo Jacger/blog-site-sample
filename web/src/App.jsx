@@ -6,6 +6,8 @@ import ShopRoute from "./routes/shop/ShopRoute.component";
 import CheckoutRoute from './routes/checkout/CheckoutRoute.component';
 
 function App() {
+  console.log('App');
+
   return (
     <Routes>
       <Route path="/" element={<NavigationRoute />}>

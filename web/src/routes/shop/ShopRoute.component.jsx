@@ -5,6 +5,7 @@ import './shop.style.scss';
 
 function ShopRoute() {
   const { products } = useContext(ProductsContext);
+  console.log('ShopRoute');
 
   return (
     <div className="products-container">

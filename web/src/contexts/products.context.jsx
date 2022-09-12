@@ -7,7 +7,8 @@ export const ProductsContext = createContext({
 
 export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const value = {products, setProducts}
+  const value = { products, setProducts };
+  console.log('ProductsProvider');
 
   useEffect(() => {
     // Fetch from API

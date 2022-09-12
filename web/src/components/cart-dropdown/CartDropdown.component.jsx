@@ -8,9 +8,9 @@ import "./CartDropdown.style.scss";
 function CartDropdown() {
   const { cartItems } = useContext(CartContext);
   let navigate = useNavigate();
+  console.log('CartDropdown');
 
   const goToCheckoutHandler = () => {
-    console.log('Im redirect');
     navigate('checkout');
   }
 
