@@ -9,7 +9,16 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 import Cookies from "universal-cookie";
 
 const firebaseConfig = {
@@ -34,6 +43,33 @@ export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
 export const db = getFirestore();
+
+export const addCollectionAndDocument = async (key, objects) => {
+  const batch = writeBatch(db);
+  const collectionRef = collection(db, key);
+
+  objects.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log("Done");
+};
+
+export const getCategoriesAndDocument = async () => {
+  const collectionRef = collection(db, "categories");
+  const queryData = query(collectionRef);
+
+  const querySnapshot = await getDocs(queryData);
+  const categoryMap = querySnapshot.docs.reduce((objects, docsSnapshot) => {
+    const { title, items } = docsSnapshot.data();
+    objects[title.toLowerCase()] = items
+    return objects;
+  }, {});
+
+  return categoryMap;
+};
 
 export const authenticateUser = async (
   userAuth,
@@ -76,7 +112,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => {
   await signOut(auth);
-  (new Cookies()).remove("user");
+  new Cookies().remove("user", { path: "/", sameSite: true });
 };
 
 export const onAuthStateChangedListener = (callback) => {
