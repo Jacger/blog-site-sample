@@ -1,4 +1,4 @@
-import CategoryContainer from '../../components/category/CategoryContainer.component';
+import DirectoryItem from '../../components/directory-item/DirectoryItem.component';
 import { useEffect, useState } from 'react';
 import './home.style.scss'
 
@@ -14,7 +14,7 @@ function HomeRoute() {
   return (
     <div className="directory-container">
       {categories.map((category) => (
-        <CategoryContainer category={category} key={category.id} />
+        <DirectoryItem category={category} key={category.id} />
       ))}
     </div>
   )
