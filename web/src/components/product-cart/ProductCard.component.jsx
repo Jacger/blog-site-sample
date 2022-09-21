@@ -6,11 +6,11 @@ import "./ProductCard.style.scss";
 function ProductCard({ product }) {
   const { name, price, imageUrl } = product;
   const { addItemToCart } = useContext(CartContext);
-  console.log('ProductCard');
+  console.log("ProductCard");
 
   const addItemHandler = () => {
-    addItemToCart(product)
-  }
+    addItemToCart(product);
+  };
 
   return (
     <div className="product-card-container">
