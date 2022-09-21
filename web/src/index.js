@@ -7,6 +7,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { UserProvider } from "./contexts/user.context";
 import { CategoriesProvider } from "./contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
+import { Auth0Provider } from "@auth0/auth0-react";
+
+const { REACT_APP_AUTH0_CLIENT_ID, REACT_APP_AUTH0_DOMAIN } = process.env;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,7 +18,13 @@ root.render(
       <UserProvider>
         <CategoriesProvider>
           <CartProvider>
-            <App />
+            <Auth0Provider
+              domain={REACT_APP_AUTH0_DOMAIN}
+              clientId={REACT_APP_AUTH0_CLIENT_ID}
+              redirectUri={window.location.origin}
+            >
+              <App />
+            </Auth0Provider>
           </CartProvider>
         </CategoriesProvider>
       </UserProvider>

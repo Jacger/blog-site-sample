@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormInput from "../../form-input/FormInput.component";
 import Button from "../../button/Button.component";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./SignInForm.style.scss";
 
 const defaultFormField = {
@@ -11,14 +12,12 @@ const defaultFormField = {
 function SignInForm() {
   const [formFields, setForms] = useState(defaultFormField);
   const { email, password } = formFields;
+  const { loginWithRedirect } = useAuth0();
   console.log("SignInForm");
 
   const InputHandler = (event) => {
     const { name, value } = event.target;
     setForms({ ...formFields, [name]: value });
-  };
-
-  const signInWithGoogle = async () => {
   };
 
   const handlerSubmit = async (event) => {
@@ -47,8 +46,8 @@ function SignInForm() {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
-            Google sign in
+          <Button type="button" buttonType="google" onClick={() => loginWithRedirect()}>
+            Auth0 sign in
           </Button>
         </div>
       </form>

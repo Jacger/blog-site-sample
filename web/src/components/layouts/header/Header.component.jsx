@@ -29,7 +29,7 @@ function Header() {
             SIGN OUT
           </div>
         ) : (
-          <Link className="nav-link" to="/auth">
+          <Link className="nav-link" to="/auth0">
             SIGN IN
           </Link>
         )}
