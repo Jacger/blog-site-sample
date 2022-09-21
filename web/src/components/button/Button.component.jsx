@@ -1,3 +1,4 @@
+import { memo } from "react";
 import "./button.style.scss";
 
 const BUTTON_TYPE_CLASSES = {
@@ -18,4 +19,4 @@ function Button({ children, buttonType = "default", ...otherProps }) {
   );
 }
 
-export default Button;
+export default memo(Button);

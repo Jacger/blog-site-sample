@@ -4,3 +4,4 @@ server/data/db
 
 # web
 web/node_modules
+web/.env

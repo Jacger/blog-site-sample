@@ -1,5 +1,5 @@
-import SignInForm from "../../components/signin-form/SignInForm.component";
-import SignUpForm from "../../components/signup-form/SignUpForm.component";
+import SignInForm from "../../components/auth0/signin-form/SignInForm.component";
+import SignUpForm from "../../components/auth0/signup-form/SignUpForm.component";
 import "./auth.style.scss";
 
 function AuthRoute() {

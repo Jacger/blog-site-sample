@@ -112,7 +112,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => {
   await signOut(auth);
-  new Cookies().remove("user", { path: "/", sameSite: true });
+  (new Cookies()).remove("user", { path: "/", sameSite: true });
 };
 
 export const onAuthStateChangedListener = (callback) => {

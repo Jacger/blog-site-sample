@@ -1,21 +1,15 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import PRODUCTS from "../data/shop-data.json";
 
 export const ProductsContext = createContext({
   products: [],
+  setProducts: () => {}
 });
 
 export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(PRODUCTS);
   const value = { products, setProducts };
   console.log('ProductsProvider');
-
-  useEffect(() => {
-    // Fetch from API
-    // ...
-    // Then assign result to `products` state
-    setProducts(PRODUCTS);
-  });
 
   return (
     <ProductsContext.Provider value={value}>
