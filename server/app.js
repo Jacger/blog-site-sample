@@ -1,6 +1,7 @@
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const dashboardRouter = require('./routes/dashboard');
+const authRouter = require('./routes/auth');
 const express = require("express");
 const path = require("path");
 // const cookieParser = require("cookie-parser");
@@ -19,5 +20,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', dashboardRouter);
 app.use('/users', usersRouter);
 app.use('/users/:userId', postsRouter);
+app.use('/callback', authRouter)
 
 module.exports = app;
